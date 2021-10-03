@@ -6,7 +6,8 @@ import { Grid,
 } from "@material-ui/core"; 
 import Carousel from 'react-material-ui-carousel';
 import { makeStyles } from "@material-ui/core/styles";
-
+import Banner from "./Banner";
+import ScrollSpy from "./ScrollSpy";
 
 type Data={
   id:number
@@ -32,14 +33,22 @@ const HomePage = ():JSX.Element=>{
     const classes = useStyles();
 
     return(
-        <div style={{margin:100}}>
+        <div style={{marginTop:"75px"}}>
 
-                <Carousel className={classes.carousel}>
-                    {
-                        data.slice(50,55).map( (d, i) =>  <MotivationalCard key={d.id} {...d}/> )
-                    }
-                </Carousel>
-                <Grid container spacing={3}>
+            <ScrollSpy
+                    tabsInScroll={[
+                        {
+                        text: "Carousel",
+                        component: 
+                        <Carousel className={classes.carousel}>
+                            {
+                                data.slice(50,55).map( (d, i) =>  <MotivationalCard key={d.id} {...d}/> )
+                            }
+                        </Carousel>
+                        },
+                        {
+                        text: "Choices",
+                        component: <Grid container spacing={3}>
 
                         <Grid item sm={1}/>
 
@@ -70,6 +79,17 @@ const HomePage = ():JSX.Element=>{
 
 
                 </Grid>
+                        },
+                        {
+                        text: "Banner",
+                        component:<Banner/>
+                        },
+                    ]}/>
+                    
+
+                            
+
+                
         </div>
     );
        
