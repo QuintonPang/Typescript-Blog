@@ -5,8 +5,8 @@ import { Card,
          CardContent, 
          Typography, 
          Box,
-} from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+} from "@mui/material";
+import { makeStyles } from "@mui/styles";
 
 interface Props{
     id:number
@@ -36,10 +36,10 @@ const useStyles = makeStyles({
     },
 
     title:{
-        color:"#ffffff",
+        //color:"#ffffff",
     },
     text:{
-        color:"#ffffff",
+        //color:"#ffffff",
         
     },
     footer:{
@@ -67,16 +67,16 @@ const MotivationalCard = ({id,title,genre,date,text,author}:Props):JSX.Element =
         <>
          <Card className={classes.card} raised>
            
-                <Box style={{ backgroundImage: `linear-gradient(to right, black 15%, transparent 85%), url("https://picsum.photos/id/${id}/5000/5000")`}}className={classes.image}>
+                <Box sx={{ backgroundImage: `linear-gradient(to right, black 15%, transparent 85%), url("https://picsum.photos/id/${id}/5000/5000")`}}className={classes.image}>
 
                     <CardContent className={classes.wrapper}>
                 
-                        <Box className={classes.text}>
+                        <Box>
                         
-                                <Typography className={classes.title} gutterBottom variant="h2" >
+                                <Typography color="primary" className={classes.title} gutterBottom variant="h2" >
                                     {title}
                                 </Typography>
-                                <Typography className={classes.text} variant="body1">
+                                <Typography color="primary" className={classes.text} variant="body1">
                                     {text}
                                 </Typography>
                         

@@ -1,13 +1,13 @@
 import * as React from 'react';
-import MotivationalCard from "./MotivationalCard";
-import SmallCard from "./SmallCard";
+import MotivationalCard from "../components/MotivationalCard";
+import SmallCard from "../components/SmallCard";
 import { Grid,
       
-} from "@material-ui/core"; 
+} from "@mui/material"; 
 import Carousel from 'react-material-ui-carousel';
 import { makeStyles } from "@material-ui/core/styles";
-import Banner from "./Banner";
-import ScrollSpy from "./ScrollSpy";
+import Banner from "../components/Banner";
+import ScrollSpy from "../components/ScrollSpy";
 
 type Data={
   id:number
