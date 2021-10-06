@@ -8,6 +8,7 @@ import Carousel from 'react-material-ui-carousel';
 import { makeStyles } from "@material-ui/core/styles";
 import Banner from "../components/Banner";
 import ScrollSpy from "../components/ScrollSpy";
+import "../components/css/Animations.css";
 
 type Data={
   id:number

@@ -19,7 +19,7 @@ const useStyles = makeStyles({
     }
 })
 
-const Banner = ():JSX.Element=>{
+const Banner:React.FC = ():JSX.Element=>{
 
     const classes = useStyles();
 

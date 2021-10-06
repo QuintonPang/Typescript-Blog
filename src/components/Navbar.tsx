@@ -49,7 +49,7 @@ const HideOnScroll = ({children,window}:Scroll):JSX.Element => {
   });
 
 
-const Navbar = ({callback,darkMode}:Props):JSX.Element=>{
+const Navbar: React.FC<Props> = ({callback,darkMode}:Props):JSX.Element=>{
 
     const classes = useStyles();
 
@@ -61,7 +61,7 @@ const Navbar = ({callback,darkMode}:Props):JSX.Element=>{
             
             <Toolbar>
               <Grid container direction="row">
-                <Grid container direction="row" item sm={11}>
+                <Grid id="logo" container direction="row" item sm={11}>
                   <Grid item>
                     <FaceIcon className={classes.logo}/>
                   </Grid>

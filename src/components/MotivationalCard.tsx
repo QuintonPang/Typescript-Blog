@@ -59,7 +59,7 @@ const useStyles = makeStyles({
 
 })
 
-const MotivationalCard = ({id,title,genre,date,text,author}:Props):JSX.Element =>{
+const MotivationalCard: React.FC<Props> =({id,title,genre,date,text,author}:Props):JSX.Element =>{
 
     const classes = useStyles();
 

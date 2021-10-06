@@ -5,7 +5,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-const App =():JSX.Element=> {
+const App:React.FC = ():JSX.Element=> {
 
   const [darkMode, setDarkMode] = useState(false);
 

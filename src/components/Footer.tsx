@@ -15,7 +15,7 @@ interface Props{
 	darkMode:boolean
 }
 
-const Footer =({darkMode}:Props):JSX.Element=>{
+const Footer:React.FC<Props> =({darkMode}:Props):JSX.Element=>{
 
 	const useStyles=makeStyles(theme=>({
 

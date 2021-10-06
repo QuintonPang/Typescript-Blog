@@ -27,7 +27,7 @@ const useStyles=makeStyles({
 
 })
 
-const SmallCard = ({title,text}:Props):JSX.Element =>{
+const SmallCard: React.FC<Props> = ({title,text}:Props):JSX.Element =>{
 
     const classes = useStyles();
     

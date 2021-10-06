@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {ReactChild, useState} from "react";
 import throttle from "lodash/throttle";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import Tabs from "@material-ui/core/Tabs";
@@ -57,18 +57,25 @@ Credits: Material UI
 Source: 
 https://github.com/mui-org/material-ui/blob/404c2ba16816f5c7ab7d8b2caf6bbc3d2218b820/docs/src/modules/utils/textToHash.js
 */
-const makeUnique:any = (hash:any, unique:any, i = 1) => {
-  const uniqueHash = i === 1 ? hash : `${hash}-${i}`;
+
+
+type UniqueObject = {
+  [key:string]:boolean
+}
+
+const makeUnique = (hash:string, unique:UniqueObject, i:number = 1):string => {
+  const uniqueHash:string = i === 1 ? hash : `${hash}-${i}`;
 
   if (!unique[uniqueHash]) {
     unique[uniqueHash] = true;
     return uniqueHash;
   }
 
+
   return makeUnique(hash, unique, i + 1);
 };
 
-const textToHash = (text:any, unique = {}) => {
+const textToHash = (text:string, unique = {}) => {
   return makeUnique(
     encodeURI(
       text
@@ -84,7 +91,7 @@ const textToHash = (text:any, unique = {}) => {
 };
 const noop = () => {};
 
-function useThrottledOnScroll(callback:any, delay:any) {
+function useThrottledOnScroll(callback:(()=>void)|null, delay:number) {
   const throttledCallback:any = React.useMemo(
     () => (callback ? throttle(callback, delay) : noop),
     [callback, delay]
@@ -101,11 +108,29 @@ function useThrottledOnScroll(callback:any, delay:any) {
   }, [throttledCallback]);
 }
 
-function ScrollSpyTabs(props:any) {
-  const [activeState, setActiveState] = React.useState(null);
+type TabType ={
+  icon?:string
+  text:string
+  component:ReactChild
+}
+
+interface Props{
+  tabsInScroll:TabType[]
+}
+
+type ItemsServer = {
+  icon:string
+  text:string
+  component:ReactChild
+  hash:string
+  node:HTMLElement | null
+}
+
+const ScrollSpyTabs: React.FC<Props> = (props:Props):JSX.Element=> {
+  const [activeState, setActiveState] = React.useState<string|null>(null);
   const { tabsInScroll } = props;
 
-  let itemsServer:any = tabsInScroll.map((tab:any) => {
+  let itemsServer:any = tabsInScroll.map((tab:TabType):ItemsServer=> {
     const hash = textToHash(tab.text);
     return {
       icon: tab.icon || "",
@@ -122,7 +147,7 @@ function ScrollSpyTabs(props:any) {
   }, [itemsServer]);
 
   const clickedRef = React.useRef(false);
-  const unsetClickedRef:any = React.useRef(null);
+  const unsetClickedRef:React.MutableRefObject<any> = React.useRef(null);
   const findActiveIndex = React.useCallback(() => {
     // set default if activeState is null
     if (activeState === null) setActiveState(itemsServer[0].hash);
@@ -168,7 +193,7 @@ function ScrollSpyTabs(props:any) {
   // Corresponds to 10 frames at 60 Hz
   useThrottledOnScroll(itemsServer.length > 0 ? findActiveIndex : null, 166);
 
-  const handleClick = (hash:any) => {
+  const handleClick = (hash:string):void => {
     // Used to disable findActiveIndex if the page scrolls due to a click
     clickedRef.current = true;
     unsetClickedRef.current = setTimeout(() => {
@@ -209,7 +234,7 @@ function ScrollSpyTabs(props:any) {
     <div>
       <nav className={classes.demo2} style={{backgroundColor:changeColor?"#989898":"#ffffff"}}>
         <StyledTabs value={activeState ? activeState : itemsServer[0].hash}>
-          {itemsServer.map((item2:any) => (
+          {itemsServer.map((item2:ItemsServer) => (
 
             <StyledTab
               key={item2.hash}
@@ -223,7 +248,7 @@ function ScrollSpyTabs(props:any) {
       </nav>
 
       <div className="container">
-        {itemsServer.map((item1:any) => (
+        {itemsServer.map((item1:ItemsServer) => (
           <article id={item1.hash} key={item1.text}>
             {item1.component}
           </article>
