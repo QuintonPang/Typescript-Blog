@@ -29,7 +29,7 @@ const useStyles = makeStyles({
 
 })
 
-const HomePage = ():JSX.Element=>{
+const HomePage : React.FC = ():JSX.Element=>{
 
     const classes = useStyles();
 
